@@ -5,7 +5,8 @@ config({
     path: '.env'
 });
 const app = express();
-const port = process.env.PORT;
+// const port = process.env.PORT;
+const port =8000;
 app.use(cors());
 app.get('/api', (_req, res, _next) => {
     res.send('Hello from server');
