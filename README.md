@@ -80,7 +80,7 @@ npm run dev
 
 ```sql
   CREATE TABLE public.match_city(
-    venue_id integer primary key serial,
+    venue_id serial primary key,
     city varchar,
     venue varchar
   );
@@ -103,7 +103,7 @@ npm run dev
 
 ```sql
   CREATE TABLE public.toss(
-    match_id integer primary_key,
+    match_id integer primary key,
     toss_winner varchar,
     toss_decision varchar
   );
@@ -124,7 +124,7 @@ npm run dev
     umpire1 varchar,
     umpire2 varchar,
     player_of_match varchar,
-    foreign key(venue_id) references match_city(venue_id);
+    foreign key(venue_id) references match_city(venue_id)
   );
 ```
 
@@ -132,7 +132,7 @@ npm run dev
 
 ```sql
   CREATE TABLE  public.ball_info(
-    ball_id primary key serial,
+    ball_id serial primary key,
     match_id integer,
     innings integer,
     overs integer,
@@ -147,7 +147,7 @@ npm run dev
     non_boundary integer,
     batting_team varchar,
     foreign key(extra_id) references extras(extra_id),
-    foreign key(wicket_info_id) references wicket_info(wicket_info_id);
+    foreign key(wicket_info_id) references wicket_info(wicket_info_id)
   );
 ```
 
