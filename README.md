@@ -278,4 +278,7 @@ npm run dev
 **_populating the table_**
 
 ```sql
+    INSERT INTO public.ball_info (match_id, innings, overs, ball_number, is_wicket_delivery, batter, bowler, nonstriker, batsman_run, non_boundary, batting_team)
+    SELECT ipl_ball_by_ball.id, ipl_ball_by_ball.innings, ipl_ball_by_ball.overs, ipl_ball_by_ball.ball_number, ipl_ball_by_ball.is_wicket_delivery, ipl_ball_by_ball.batter, ipl_ball_by_ball.bowler, ipl_ball_by_ball.nonstriker, ipl_ball_by_ball.batsman_run, ipl_ball_by_ball.non_boundary, ipl_ball_by_ball.batting_team
+    FROM ipl_ball_by_ball;
 ```
