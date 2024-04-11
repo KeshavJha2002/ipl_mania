@@ -282,3 +282,393 @@ npm run dev
     SELECT ipl_ball_by_ball.id, ipl_ball_by_ball.innings, ipl_ball_by_ball.overs, ipl_ball_by_ball.ball_number, ipl_ball_by_ball.is_wicket_delivery, ipl_ball_by_ball.batter, ipl_ball_by_ball.bowler, ipl_ball_by_ball.nonstriker, ipl_ball_by_ball.batsman_run, ipl_ball_by_ball.non_boundary, ipl_ball_by_ball.batting_team
     FROM ipl_ball_by_ball;
 ```
+
+## API Documentation
+
+### Top Bowlers Details
+
+**Endpoint:** `/get_top_bowlers`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top bowlers based on the number of wickets taken.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top bowlers.
+  
+    ```json
+    [
+        {
+            "bowler": "Bowler Name",
+            "wicket_count": 10
+        },
+        {
+            "bowler": "Another Bowler",
+            "wicket_count": 8
+        },
+        ...
+    ]
+    ```
+
+### Top Batters Details
+
+**Endpoint:** `/get_top_batter`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top batters based on the total runs scored.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top batters.
+  
+    ```json
+    [
+        {
+            "batter": "Batter Name",
+            "tot_run": 500
+        },
+        {
+            "batter": "Another Batter",
+            "tot_run": 480
+        },
+        ...
+    ]
+    ```
+
+### Boundary Details
+
+**Endpoint:** `/get_boundary_details`
+
+**Method:** GET
+
+**Description:** Retrieves details of the number of fours and sixes scored by batters.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON object containing the count of fours and sixes.
+  
+    ```json
+    {
+        "fours": {
+            "batter": "Batter Name",
+            "no_of_boundary": 20
+        },
+        "sixes": {
+            "batter": "Another Batter",
+            "no_of_boundary": 15
+        }
+    }
+    ```
+
+### Error Handling
+
+In case of any errors, the API will respond with a 500 Internal Server Error along with an error message in the response body.
+
+**Response:**
+
+- **Status Code:** 500 Internal Server Error
+- **Body:** JSON object with an error message.
+
+    ```json
+    {
+        "message": "Error in fetching the request"
+    }
+    ```
+
+### Top Bowlers Details for a Specific Season
+
+**Endpoint:** `/get_top_bowlers/:season`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top bowlers for a specific season based on the number of wickets taken.
+
+**Request Parameters:**
+
+- `season`: The season for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top bowlers.
+  
+    ```json
+    [
+        {
+            "bowler": "Bowler Name",
+            "wicket_count": 10
+        },
+        {
+            "bowler": "Another Bowler",
+            "wicket_count": 8
+        },
+        ...
+    ]
+    ```
+
+### Top Batters Details for a Specific Season
+
+**Endpoint:** `/get_top_batter/:season`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top batters for a specific season based on the total runs scored.
+
+**Request Parameters:**
+
+- `season`: The season for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top batters.
+  
+    ```json
+    [
+        {
+            "batter": "Batter Name",
+            "tot_run": 500
+        },
+        {
+            "batter": "Another Batter",
+            "tot_run": 480
+        },
+        ...
+    ]
+    ```
+
+### Boundary Details for a Specific Season
+
+**Endpoint:** `/get_boundary_details/:season`
+
+**Method:** GET
+
+**Description:** Retrieves details of the number of fours and sixes scored by batters for a specific season.
+
+**Request Parameters:**
+
+- `season`: The season for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the count of fours and sixes.
+  
+    ```json
+    [
+        {
+            "batter": "Batter Name",
+            "no_of_boundary": 20
+        },
+        {
+            "batter": "Another Batter",
+            "no_of_boundary": 15
+        },
+        ...
+    ]
+    ```
+
+### Win Details for a Specific Season
+
+**Endpoint:** `/get_win_details/:season`
+
+**Method:** GET
+
+**Description:** Retrieves details of wins and losses for each team in a specific season.
+
+**Request Parameters:**
+
+- `season`: The season for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the win and loss records for each team.
+  
+    ```json
+    [
+        {
+            "team": "Team Name",
+            "wins": 10,
+            "losses": 5
+        },
+        {
+            "team": "Another Team",
+            "wins": 8,
+            "losses": 7
+        },
+        ...
+    ]
+    ```
+
+### Error Handling
+
+In case of any errors, the API will respond with a 500 Internal Server Error along with an error message in the response body.
+
+**Response:**
+
+- **Status Code:** 500 Internal Server Error
+- **Body:** JSON object with an error message.
+
+    ```json
+    {
+        "message": "Error in fetching the request"
+    }
+    ```
+
+### Top Bowlers Details for a Specific Team
+
+**Endpoint:** `/get_top_bowlers/:teamname`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top bowlers for a specific team based on the number of wickets taken against opponents.
+
+**Request Parameters:**
+
+- `teamname`: The name of the team for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top bowlers.
+  
+    ```json
+    [
+        {
+            "bowler": "Bowler Name",
+            "wicket_count": 10
+        },
+        {
+            "bowler": "Another Bowler",
+            "wicket_count": 8
+        },
+        ...
+    ]
+    ```
+
+### Top Batters Details for a Specific Team
+
+**Endpoint:** `/get_top_batter/:teamname`
+
+**Method:** GET
+
+**Description:** Retrieves details of the top batters for a specific team based on the total runs scored against opponents.
+
+**Request Parameters:**
+
+- `teamname`: The name of the team for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the details of the top batters.
+  
+    ```json
+    [
+        {
+            "batter": "Batter Name",
+            "tot_run": 500
+        },
+        {
+            "batter": "Another Batter",
+            "tot_run": 480
+        },
+        ...
+    ]
+    ```
+
+### Boundary Details for a Specific Team
+
+**Endpoint:** `/get_boundary_details/:teamname`
+
+**Method:** GET
+
+**Description:** Retrieves details of the number of fours and sixes scored by batters for a specific team.
+
+**Request Parameters:**
+
+- `teamname`: The name of the team for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON array containing the count of fours and sixes.
+  
+    ```json
+    [
+        {
+            "batter": "Batter Name",
+            "count": 20
+        },
+        {
+            "batter": "Another Batter",
+            "count": 15
+        },
+        ...
+    ]
+    ```
+
+### Win-Loss Details for a Specific Team
+
+**Endpoint:** `/get_win_details/:teamname`
+
+**Method:** GET
+
+**Description:** Retrieves details of matches won and lost by a specific team in each season.
+
+**Request Parameters:**
+
+- `teamname`: The name of the team for which the data is requested.
+
+**Response:**
+
+- **Status Code:** 200 OK
+- **Body:** JSON object containing the data of matches won and lost in each season.
+  
+    ```json
+    {
+        "win_data": [
+            {
+                "season": 2020,
+                "matches_won": 10
+            },
+            {
+                "season": 2019,
+                "matches_won": 8
+            },
+            ...
+        ],
+        "loss_data": [
+            {
+                "season": 2020,
+                "matches_lost": 5
+            },
+            {
+                "season": 2019,
+                "matches_lost": 7
+            },
+            ...
+        ]
+    }
+    ```
+
+### Error Handling
+
+In case of any errors, the API will respond with a 500 Internal Server Error along with an error message in the response body.
+
+**Response:**
+
+- **Status Code:** 500 Internal Server Error
+- **Body:** JSON object with an error message.
+
+    ```json
+    {
+        "message": "Error in fetching the request"
+    }
+    ```
