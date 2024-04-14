@@ -1,60 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from '../components/shared/navbar';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const SeasonPage1 = () => {
-    const { season } = useParams();
-    const [seasonData, setSeasonData] = useState([]);
-    const [coolFacts, setCoolFacts] = useState([]);
+const SeasonPage = ({ tag }) => {
+  const [top_bowlers, set_top_bowlers] = useState([]);
+  const [top_batters, set_top_batters] = useState([]);
+  const [win_details, set_win_details] = useState([]);
+  const [boundary_details, set_boundary_details] = useState([]);
+  
+  useEffect(() => {
+    const fetchTopBowlers = async () => {
+      try {
+          const response = await axios.get(`http://localhost:7000/season/get_top_bowlers/${tag}`);
+          set_top_bowlers(response.data);
+      } catch (error) {
+          console.error("Error fetching top bowlers:", error);
+      }
+    };
 
-    useEffect(() => {
-        // Fetch data for the selected season from backend API
-        fetch(`your_backend_api_url/season/${season}`)
-            .then(response => response.json())
-            .then(data => setSeasonData(data))
-            .catch(error => console.error('Error fetching season data:', error));
+    const fetchTopBatters = async () => {
+      try {
+          const response = await axios.get(`http://localhost:7000/season/get_top_batter/${tag}`);
+          set_top_batters(response.data);
+      } catch (error) {
+          console.error("Error fetching top batters:", error);
+      }
+    };
 
-        // Fetch cool facts about IPL from backend API
-        fetch('your_backend_api_url/cool-facts')
-            .then(response => response.json())
-            .then(data => setCoolFacts(data))
-            .catch(error => console.error('Error fetching cool facts:', error));
-    }, [season]);
+    const fetchWinDetails = async () => {
+      try {
+          const response = await axios.get(`http://localhost:7000/season/get_win_details/${tag}`);
+          set_win_details(response.data);
+      } catch (error) {
+          console.error("Error fetching win details:", error);
+      }
+    };
 
-    return (
-        <div>
-            <Navbar />
-            <div className="container mx-auto p-4">
-                <h1 className="text-3xl font-bold mb-4">Season {season}</h1>
-                <h2 className="text-xl font-bold mb-2">Season Data</h2>
-                <table className="table-auto w-full mb-4">
-                    <thead>
-                        <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
-                            {/* Add more columns as needed */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {seasonData.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.column1}</td>
-                                <td>{item.column2}</td>
-                                {/* Add more cells as needed */}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+    const fetchBoundaryDetails = async () => {
+      try {
+          const response = await axios.get(`http://localhost:7000/season/get_boundary_details/${tag}`);
+          set_boundary_details(response.data);
+      } catch (error) {
+          console.error("Error fetching boundary details:", error);
+      }
+    };
 
-                <h2 className="text-xl font-bold mb-2">Cool Facts About IPL</h2>
-                <ul>
-                    {coolFacts.map((fact, index) => (
-                        <li key={index}>{fact}</li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+    fetchTopBowlers();
+    fetchTopBatters();
+    fetchWinDetails();
+    fetchBoundaryDetails();
+  }, [tag]);
+
+  console.log(top_bowlers);
+    console.log(top_batters);
+    console.log(win_details);
+    console.log(boundary_details);
+
+  return (
+    <div>
+        Hello
+    </div>
+  )
 }
 
-export default SeasonPage;
+export default SeasonPage

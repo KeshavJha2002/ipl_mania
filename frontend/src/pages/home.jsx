@@ -1,5 +1,3 @@
-import React from 'react';
-import Navbar from '../components/shared/navbar';
 import teams from '../lib/teams'
 const HomePage = () => {
     // Mock data for teams
@@ -21,8 +19,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <Navbar />
-            <section className="bg-black text-white h-screen flex justify-center items-center ">
+            <section className="bg-black text-white min-h-screen flex justify-center items-center ">
                 <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center">
                     <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
                         <h1 className="text-4xl font-bold mb-4">Welcome to IPL Mania!</h1>

@@ -1,18 +1,14 @@
 // Sidebar.jsx
-import React from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import teams from '../../lib/teams'; // Assuming teams data is exported from './teams' file
-import TeamPage from '../../pages/TeamPage'; // Assuming TeamPage component is defined in a separate file
-import Navbar from './navbar';
 
-const Sidebar = () => {
+const TeamSidebar = () => {
     return (
         <>
-        <Navbar/>
         <div className="flex">
             {/* Sidebar */}
-            <div className="sidebar bg-black text-white h-screen fixed top-20 "> 
-                <h1 className="text-lg font-bold mb-4">Teams</h1>
+            <div className="sidebar bg-black text-white h-screen"> 
+                <h1 className="text-lg font-bold mb-4 text-center">Teams</h1>
                 <ul>
                     {teams.map((team) => (
                         <li key={team.id} className="mb-2">
@@ -27,18 +23,9 @@ const Sidebar = () => {
                     ))}
                 </ul>
             </div>
-            {/* Team Page */}
-            {/* <div className="team-page mt-10 w-4/5">
-                <Routes>
-                    {teams.map((team) => (
-                        
-                        <NavLink to={`/teams/${team.path}`} />
-                    ))}
-                </Routes>
-            </div> */}
         </div>
-     </>
+    </>
     );
 }
 
-export default Sidebar;
+export default TeamSidebar;

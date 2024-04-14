@@ -1,43 +1,67 @@
-import React from 'react';
-// import Chart from 'react-chartjs-2';
-import teams from '../lib/teams'; // Assuming teams data is exported from './teams' file
-import Navbar from '../components/shared/navbar';
-import Sidebar from '../components/shared/sidebar';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import teams from '../lib/teams'
 
-const TeamPage = () => {
-    // Sample data for charts
-    const chartData = {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-        datasets: [{
-            label: 'Sales',
-            data: [65, 59, 80, 81, 56]
-        }]
-    };
-    // console.log(team);
+const TeamPage = ({ tag }) => {
+    const [top_bowlers, set_top_bowlers] = useState([]);
+    const [top_batters, set_top_batters] = useState([]);
+    const [win_details, set_win_details] = useState([]);
+    const [boundary_details, set_boundary_details] = useState([]);
+
+    tag = tag.replace('%20', '');
+
+    useEffect(() => {
+        const fetchTopBowlers = async () => {
+            try {
+                const response = await axios.get(`http://localhost:7000/team/get_top_bowlers/${tag}`);
+                set_top_bowlers(response.data);
+            } catch (error) {
+                console.error("Error fetching top bowlers:", error);
+            }
+        };
+
+        const fetchTopBatters = async () => {
+            try {
+                const response = await axios.get(`http://localhost:7000/team/get_top_batter/${tag}`);
+                set_top_batters(response.data);
+            } catch (error) {
+                console.error("Error fetching top batters:", error);
+            }
+        };
+
+        const fetchWinDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:7000/team/get_win_details/${tag}`);
+                set_win_details(response.data);
+            } catch (error) {
+                console.error("Error fetching win details:", error);
+            }
+        };
+
+        const fetchBoundaryDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:7000/team/get_boundary_details/${tag}`);
+                set_boundary_details(response.data);
+            } catch (error) {
+                console.error("Error fetching boundary details:", error);
+            }
+        };
+
+        fetchTopBowlers();
+        fetchTopBatters();
+        fetchWinDetails();
+        fetchBoundaryDetails();
+    }, [tag]);
+
+    // console.log(top_bowlers[2]);
+    // console.log(top_batters);
+    // console.log(win_details);
+    // console.log(boundary_details);
+
     return (
-        <>
-        <Navbar />
-            <div className="ml-30 flex" style={{ height: '100vh', width: '100vw' }}>
-                <Sidebar />
-                <div className="teamcontent w-2/3 pt-32 ml-30 bg-gradient-to-tr from-gray-900 to-gray-700 text-white">
-                    {teams.map((team) => (
-                        <div key={team.id} className="team-container mb-8 flex items-center">
-                            <img src={team.team_icon} alt={team.name} className="w-16 h-16 mr-4 rounded-full" />
-                            <div className="team-info">
-                                <h2 className="text-xl font-semibold">{team.name}</h2>
-                                <p>{team.description}</p>
-                                <div className="team-stats mt-2">
-                                    {/* <p>Trophies: {team.trophies}</p>
-                                    <p>Orange Caps: {team.orange_caps}</p>
-                                    <p>Purple Caps: {team.purple_caps}</p> */}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-       
-    </>
+        <div>
+            
+        </div>
     );
 }
 

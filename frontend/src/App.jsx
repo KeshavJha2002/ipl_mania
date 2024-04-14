@@ -1,17 +1,17 @@
 // App.jsx
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/shared/sidebar'; // Adjust the path accordingly
-// import Navbar from './components/shared/navbar';
 import Home from './pages/home'
-import TeamPage from './pages/TeamPage';
+import TeamParent from './pages/TeamParent';
+import SeasonParent from './pages/SeasonParent';
+import Navbar from './components/shared/navbar';
 const App = () => {
     return (
       <Router>
+          <Navbar />
       <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/teams/*" element={<Sidebar />} />
-          <Route path="/teams/:id" element={<TeamPage/>}/>
+          <Route path="/teams/*" element={<TeamParent />} />
+          <Route path="/seasons/*" element={<SeasonParent />} />
           {/* Add more routes here if needed */}
       </Routes>
   </Router>
