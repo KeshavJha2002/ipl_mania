@@ -22,6 +22,9 @@ const Navbar = () => {
                 <li>
                     <NavLink to="/matches" className="text-white text-xl hover:text-gray-200">Seasons</NavLink>
                 </li>
+                <li>
+                    <NavLink to="/forms" className="text-white text-xl hover:text-gray-200">Forms</NavLink>
+                </li>
             </ul>
         </nav>
     );
