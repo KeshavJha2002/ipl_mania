@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 
 const SeasonParent = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-20 flex flex-row">
       <SeasonSidebar/>
     <div className="mt-10 w-4/5">
         <Routes>

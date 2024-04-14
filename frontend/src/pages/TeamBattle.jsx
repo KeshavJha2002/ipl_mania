@@ -1,55 +1,42 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import teamsData from "../lib/teams"; // Assuming teams data is exported from './teams' file
-import Navbar from "../components/shared/navbar";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import Paper from "@mui/material/Paper";
+import axios from "axios";
 
-const FormsPage = () => {
-  // Sample data for charts
-  const chartData = {
-    labels: ["January", "February", "March", "April", "May"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [65, 59, 80, 81, 56],
-      },
-    ],
-  };
-
+const TeamBattle = () => {
   // State variables
   const [selectedTeam1, setSelectedTeam1] = useState("");
   const [selectedTeam2, setSelectedTeam2] = useState("");
-  const [error, setError] = useState("");
-  const [teamInfo, setTeamInfo] = useState({});
+  const [matchResults, setMatchResults] = useState([]);
 
   // Function to fetch team information from the database
-  const fetchTeamInfo = () => {
-    // Reset error message
-    setError("");
-
-    // Check if exactly two teams are selected
-    if (!selectedTeam1 || !selectedTeam2 || selectedTeam1 === selectedTeam2) {
-      setError("Please select two different teams.");
-      return;
+  const fetchResult = async () => {
+    try {  
+      const res = await axios.get(`http://localhost:7000/battle/get_battle_result/${selectedTeam1}/${selectedTeam2}`);
+      setMatchResults(res.data);
+    } catch (error) {
+      console.error("Error fetching battle result:", error);
     }
-
-    // Here you would make an API call to fetch team information from the database based on selectedTeams
-    // For demonstration purposes, I'll just log the selected teams
-    console.log("Selected Teams:", selectedTeam1, selectedTeam2);
-
-    // Set team information
-    setTeamInfo({ selectedTeam1, selectedTeam2 });
-
-    // Reset selectedTeams after fetching information
-    setSelectedTeam1("");
-    setSelectedTeam2("");
   };
+
+  useEffect (() => {
+    if (selectedTeam1 && selectedTeam2) {
+      fetchResult();
+    }
+  }, [selectedTeam1, selectedTeam2]);
 
   return (
     <>
-      <Navbar />
       <div
         className=" items-center bg-gray-900"
         style={{
@@ -62,7 +49,7 @@ const FormsPage = () => {
         }}
       >
         <div
-          className="teamcontent flex bg-gradient-to-tr from-gray-900 to-gray-700 text-white p-8 rounded items-center justify-center"
+          className="flex bg-gradient-to-tr from-gray-900 to-gray-700 text-white p-8 rounded items-center justify-center"
           style={{
             paddingLeft: "20px",
             paddingTop: "20px",
@@ -71,12 +58,7 @@ const FormsPage = () => {
           }}
         >
           {/* Team selection form */}
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              fetchTeamInfo();
-            }}
-          >
+          <form>
             <h1 className=" flex text-4xl font-semibold mb-4 justify-center">
               Select Two Teams
             </h1>
@@ -118,46 +100,35 @@ const FormsPage = () => {
                 </Select>
               </FormControl>
             </div>
-
-            {error && (
-              <p className="text-red-500 mb-4 flex justify-center">{error}</p>
-            )}
-            <button
-              type="submit"
-              disabled={!selectedTeam1 || !selectedTeam2}
-              className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded items-center w-full justify-center"
-              style={{
-                cursor: !selectedTeam1 || !selectedTeam2 ? "not-allowed" : "pointer",
-                fontSize: "1.2rem",
-              }}
-            >
-              Get Team Info
-            </button>
           </form>
-
-          {/* Display team information */}
-          
         </div>
-        {teamInfo.selectedTeam1 && teamInfo.selectedTeam2 && (
-            <div
-              className="teamcontent bg-gradient-to-tr from-white to-white text-black p-8 rounded items-center"
-              style={{
-                paddingLeft: "40px",
-                margin: "25px",
-                marginTop: "40px",
-                paddingTop: "40px",
-                width: "1400px",
-                height: "auto",
-              }}
-            >
-              <p>Selected Team 1: {teamInfo.selectedTeam1}</p>
-              <p>Selected Team 2: {teamInfo.selectedTeam2}</p>
-            </div>
-          )}
+        {selectedTeam1.length > 0 && selectedTeam2.length > 0 && (
+          <TableContainer component={Paper}>
+            <Table aria-label="match results table">
+              <TableHead>
+                <TableRow>
+                  <TableCell><b>Season</b></TableCell>
+                  <TableCell><b>Venue</b></TableCell>
+                  <TableCell><b>Winning Team</b></TableCell>
+                  <TableCell><b>Player of the Match</b></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {matchResults.map((match, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{match.season}</TableCell>
+                    <TableCell>{match.venue}</TableCell>
+                    <TableCell>{match.winning_team}</TableCell>
+                    <TableCell>{match.player_of_match}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </div>
     </>
   );
 };
 
-export default FormsPage;
-
+export default TeamBattle;

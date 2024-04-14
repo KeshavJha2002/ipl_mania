@@ -23,9 +23,6 @@ const Navbar = () => {
                 <li>
                     <NavLink to="/team-battles" className="text-white text-xl hover:text-gray-200">Team Battles</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/forms" className="text-white text-xl hover:text-gray-200">Forms</NavLink>
-                </li>
             </ul>
         </nav>
     );

@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 
 const TeamParent = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-20 flex flex-row">
       <TeamSidebar/>
     <div className="mt-10 w-4/5">
         <Routes>

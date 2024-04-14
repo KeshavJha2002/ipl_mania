@@ -5,6 +5,7 @@ const helmet = require('helmet')
 const pool = require('./models/db')
 const seasonRouter = require('./routes/seasonRouter')
 const teamRouter = require('./routes/teamRouter')
+const teamBattleRouter = require('./routes/teamBattleRouter')
 const apiRouter = require('./routes/apiRouter')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use("/season", seasonRouter)
 app.use("/team", teamRouter)
 app.use("/api", apiRouter)
+app.use("/battle", teamBattleRouter)
 
 app.listen(port, () => {
     console.log(`Server listening at ${port}...`)
