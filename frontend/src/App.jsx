@@ -4,6 +4,8 @@ import Home from './pages/home'
 import TeamParent from './pages/TeamParent';
 import SeasonParent from './pages/SeasonParent';
 import Navbar from './components/shared/navbar';
+import Forms from './pages/forms';
+
 const App = () => {
     return (
       <Router>
@@ -12,7 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/teams/*" element={<TeamParent />} />
           <Route path="/seasons/*" element={<SeasonParent />} />
-          {/* Add more routes here if needed */}
+          <Route path="/forms" element={<Forms />} />
       </Routes>
   </Router>
     );
