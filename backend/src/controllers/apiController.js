@@ -23,7 +23,7 @@ const getBattingDetails = async(req, res) => {
 const getBoundaryDetails = async(req, res) => {
     try {
         const boundaryData = await pool.query('with cte as (select * from ball_info where non_boundary = 0 and (batsman_run = 6 or batsman_run = 4)) select batter,count(batsman_run) as no_of_boundary from cte e join matches_played d on d.match_id = e.match_id group by batter order by no_of_boundary desc limit 5')
-        res.status(200).json({ fours: boundaryData.rows[1], sixes: boundaryData.rows[0] })
+        res.status(200).json(boundaryData.rows)
     } catch (err) {
         console.log(err.message)
         res.status(500).json({ message: "Error in fetching the request" })

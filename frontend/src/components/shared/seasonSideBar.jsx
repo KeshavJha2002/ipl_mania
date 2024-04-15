@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom';
 import seasons from '../../lib/seasons';
 
 const SeasonSidebar = () => {
-    console.log(seasons)
     return (
         <>
-        <div className="flex">
+        <div className="flex h-[100%] justify-center items-center">
             {/* Sidebar */}
             <div className="bg-black text-white w-64">
                 <h1 className="text-[24px] font-bold mb-4 text-center">Seasons</h1>

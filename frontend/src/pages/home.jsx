@@ -1,4 +1,5 @@
 import teams from '../lib/teams'
+import ipl from '../assets/ipl.jpeg'
 const HomePage = () => {
     // Mock data for teams
     // const teams = [
@@ -29,7 +30,7 @@ const HomePage = () => {
                         </p>
                     </div>
                     <div className="w-full lg:w-1/2">
-                        <img src="https://via.placeholder.com/400" alt="Random Image" className="w-full h-auto" />
+                        <img src={ipl} alt="Random Image" className="w-full h-auto" />
                     </div>
                 </div>
             </section>
@@ -45,7 +46,7 @@ const HomePage = () => {
         </svg>
         <div>
           <h3 className="text-2xl font-semibold mb-4">Total Matches</h3>
-          <p className="text-4xl font-bold">150</p>
+          <p className="text-4xl font-bold">964</p>
         </div>
       </div>
       
@@ -56,7 +57,7 @@ const HomePage = () => {
         </svg>
         <div>
           <h3 className="text-2xl font-semibold mb-4">Total Sixes</h3>
-          <p className="text-4xl font-bold">5000</p>
+          <p className="text-4xl font-bold">24,645</p>
         </div>
       </div>
       
@@ -67,7 +68,7 @@ const HomePage = () => {
         </svg>
         <div>
           <h3 className="text-2xl font-semibold mb-4">Total Balls</h3>
-          <p className="text-4xl font-bold">75000</p>
+          <p className="text-4xl font-bold">89,088</p>
         </div>
       </div>
       
@@ -78,7 +79,7 @@ const HomePage = () => {
         </svg>
         <div>
           <h3 className="text-2xl font-semibold mb-4">Total Wickets</h3>
-          <p className="text-4xl font-bold">2000</p>
+          <p className="text-4xl font-bold"> 3,865</p>
         </div>
       </div>
     </div>

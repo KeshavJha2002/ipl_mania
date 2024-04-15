@@ -7,20 +7,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box'
-import  Stack  from '@mui/material/Stack';
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import { LineChart } from '@mui/x-charts/LineChart';
 
-// eslint-disable-next-line react/prop-types
 const TeamPage = ({ tag }) => {
     const [top_bowlers, set_top_bowlers] = useState([]);
     const [top_batters, set_top_batters] = useState([]);
     const [win_details, set_win_details] = useState({ win_data: [], loss_data: [] });
     const [boundary_details, set_boundary_details] = useState([]);
-
-    // eslint-disable-next-line react/prop-types
-    tag = tag.replace('%20', '');
 
     useEffect(() => {
         const fetchTopBowlers = async () => {
@@ -68,101 +63,96 @@ const TeamPage = ({ tag }) => {
         fetchWinDetails();
         fetchBoundaryDetails();
     }, [tag]);
-    
 
     return (
-        <Box display = "flex">
-          <Grid container spacing = {4}>
-            <Stack direction = "row" spacing = {2} justifyContent="flex-end" alignItems = "flex-end" useFlexGap flexWrap="wrap">
-            <Grid xs = {4}>
-                {top_bowlers.length > 0 && (
-                    <TableContainer component={Paper}>
-                        <Table aria-label="top bowlers table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Bowler</TableCell>
-                                    <TableCell align="right">Wicket Count</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {top_bowlers.map((bowlerData, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell component="th" scope="row">
-                                            {bowlerData.bowler}
-                                        </TableCell>
-                                        <TableCell align="right">{bowlerData.wicket_count}</TableCell>
+        <Box display="flex" justifyContent="center">
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    {top_bowlers.length > 0 && (
+                        <TableContainer component={Paper}>
+                            <Table aria-label="top bowlers table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell><b>Bowler</b></TableCell>
+                                        <TableCell align="right"><b>Wicket Count</b></TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )}
-            </Grid>
-            <Grid xs = {4}>
-                {top_batters.length > 0 && (
-                    <TableContainer component={Paper}>
-                        <Table aria-label="top batters table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Batter</TableCell>
-                                    <TableCell align="right">Total Runs</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {top_batters.map((batterData, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell component="th" scope="row">
-                                            {batterData.batter}
-                                        </TableCell>
-                                        <TableCell align="right">{batterData.tot_run}</TableCell>
+                                </TableHead>
+                                <TableBody>
+                                    {top_bowlers.map((bowlerData, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell component="th" scope="row">
+                                                {bowlerData.bowler}
+                                            </TableCell>
+                                            <TableCell align="right">{bowlerData.wicket_count}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    {top_batters.length > 0 && (
+                        <TableContainer component={Paper}>
+                            <Table aria-label="top batters table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell><b>Batter</b></TableCell>
+                                        <TableCell align="right"><b>Total Runs</b></TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )}
-            </Grid>
-            <Grid xs = {8}>
-                {boundary_details.length > 0 && (
-                    <TableContainer component={Paper}>
-                        <Table aria-label="boundary details table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Batter</TableCell>
-                                    <TableCell align="right">Number of Boundaries</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {boundary_details.map((boundaryData, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell component="th" scope="row">
-                                            {boundaryData.batter}
-                                        </TableCell>
-                                        <TableCell align="right">{boundaryData.total_boundaries}</TableCell>
+                                </TableHead>
+                                <TableBody>
+                                    {top_batters.map((batterData, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell component="th" scope="row">
+                                                {batterData.batter}
+                                            </TableCell>
+                                            <TableCell align="right">{batterData.tot_run}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={6}>
+                    {boundary_details.length > 0 && (
+                        <TableContainer component={Paper}>
+                            <Table aria-label="boundary details table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell><b>Batter</b></TableCell>
+                                        <TableCell align="right"><b>Number of Boundaries</b></TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )}
-            </Grid>
-            </Stack>
-            <Grid item xs = {12}>
-                {win_details.win_data.length > 0 && (
-                    <LineChart
-                    series={[
-                        { curve: "linear", data: win_details.win_data.map(data => parseFloat(data.matches_won)), color: "green", label: "Wins" },
-                        { curve: "linear", data: win_details.loss_data.map(data => parseFloat(data.matches_lost)), color: "red", label: "Losses" }
-                    ]}
-                    xAxis={[
-                        { scaleType: 'point', data: win_details.win_data.map(data => data.season) }
-                    ]}
-                    width={1000}
-                    height={300}
-                    margin={{ top: 30, right: 10, left: 30, bottom: 30 }}
-                    />
-                )}
-            </Grid>
+                                </TableHead>
+                                <TableBody>
+                                    {boundary_details.map((boundaryData, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell component="th" scope="row">
+                                                {boundaryData.batter}
+                                            </TableCell>
+                                            <TableCell align="right">{boundaryData.total_boundaries}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    )}
+                </Grid>
+                    {win_details.win_data.length > 0 && (
+                        <LineChart
+                            series={[
+                                { curve: "linear", data: win_details.win_data.map(data => parseFloat(data.matches_won)), color: "green", label: "Wins" },
+                                { curve: "linear", data: win_details.loss_data.map(data => parseFloat(data.matches_lost)), color: "red", label: "Losses" }
+                            ]}
+                            xAxis={[
+                                { scaleType: 'point', data: win_details.win_data.map(data => data.season) }
+                            ]}
+                            width={1100}
+                            height={300}
+                            margin={{ top: 30, right: 20, left: 30, bottom: 30 }}
+                        />
+                    )}
             </Grid>
         </Box>
     );
