@@ -25,7 +25,7 @@ const HomePage = () => {
                         <h1 className="text-4xl font-bold mb-4">Welcome to IPL Mania!</h1>
                         <p className="text-lg">
                             IPL Mania is your ultimate destination for all things related to the Indian Premier League. 
-                            Whether you're a die-hard fan or a casual observer, we've got you covered with the latest news, match updates, player stats, and much more!
+                            Whether you&aposre a die-hard fan or a casual observer, we&aposve got you covered with the latest news, match updates, player stats, and much more!
                         </p>
                     </div>
                     <div className="w-full lg:w-1/2">

@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack'
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const iplTeams = [
@@ -30,6 +33,7 @@ const iplTeams = [
 ];
 
 
+// eslint-disable-next-line react/prop-types
 const SeasonPage = ({ tag }) => {
   const [top_bowlers, set_top_bowlers] = useState([]);
   const [top_batters, set_top_batters] = useState([]);
@@ -84,8 +88,10 @@ const SeasonPage = ({ tag }) => {
   const loss_array = win_details.map(detail => parseFloat(detail.losses));
 
   return (
-    <div>
-      <div>
+    <Box display = "flex">
+      <Grid container spacing = {4}>
+      <Stack direction = "row" spacing = {2} justifyContent="flex-end" alignItems = "flex-end" useFlexGap flexWrap="wrap">
+      <Grid xs = {4}>
             {top_bowlers.length > 0 && (
                 <TableContainer component={Paper}>
                     <Table aria-label="top bowlers table">
@@ -108,8 +114,8 @@ const SeasonPage = ({ tag }) => {
                     </Table>
                 </TableContainer>
             )}
-      </div>
-      <div>
+      </Grid>
+      <Grid xs = {4}>
             {top_batters.length > 0 && (
                 <TableContainer component={Paper}>
                     <Table aria-label="top batters table">
@@ -132,8 +138,8 @@ const SeasonPage = ({ tag }) => {
                     </Table>
                 </TableContainer>
             )}
-      </div>
-      <div>
+      </Grid>
+      <Grid xs = {8}>
             {boundary_details.length > 0 && (
                 <TableContainer component={Paper}>
                     <Table aria-label="boundary details table">
@@ -156,8 +162,9 @@ const SeasonPage = ({ tag }) => {
                     </Table>
                 </TableContainer>
             )}
-        </div>
-        <div>
+        </Grid>
+        </Stack>
+        <Grid item xs = {12}>
           {win_details.length>0 && (<LineChart
               series={[
                 {curve: "linear", data: win_array, color: "green", label: "wins"},
@@ -170,8 +177,9 @@ const SeasonPage = ({ tag }) => {
               height={300}
               margin={{ top: 30, right: 10, left: 30, bottom: 30 }}>
           </LineChart>)}
-        </div>
-    </div>
+        </Grid>
+        </Grid>
+    </Box>
   )
 }
 

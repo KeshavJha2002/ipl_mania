@@ -7,14 +7,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box'
+import  Stack  from '@mui/material/Stack';
+import Grid from '@mui/material/Grid'
 import { LineChart } from '@mui/x-charts/LineChart';
 
+// eslint-disable-next-line react/prop-types
 const TeamPage = ({ tag }) => {
     const [top_bowlers, set_top_bowlers] = useState([]);
     const [top_batters, set_top_batters] = useState([]);
     const [win_details, set_win_details] = useState({ win_data: [], loss_data: [] });
     const [boundary_details, set_boundary_details] = useState([]);
 
+    // eslint-disable-next-line react/prop-types
     tag = tag.replace('%20', '');
 
     useEffect(() => {
@@ -66,8 +71,10 @@ const TeamPage = ({ tag }) => {
     
 
     return (
-        <div>
-            <div>
+        <Box display = "flex">
+          <Grid container spacing = {4}>
+            <Stack direction = "row" spacing = {2} justifyContent="flex-end" alignItems = "flex-end" useFlexGap flexWrap="wrap">
+            <Grid xs = {4}>
                 {top_bowlers.length > 0 && (
                     <TableContainer component={Paper}>
                         <Table aria-label="top bowlers table">
@@ -90,8 +97,8 @@ const TeamPage = ({ tag }) => {
                         </Table>
                     </TableContainer>
                 )}
-            </div>
-            <div>
+            </Grid>
+            <Grid xs = {4}>
                 {top_batters.length > 0 && (
                     <TableContainer component={Paper}>
                         <Table aria-label="top batters table">
@@ -114,8 +121,8 @@ const TeamPage = ({ tag }) => {
                         </Table>
                     </TableContainer>
                 )}
-            </div>
-            <div>
+            </Grid>
+            <Grid xs = {8}>
                 {boundary_details.length > 0 && (
                     <TableContainer component={Paper}>
                         <Table aria-label="boundary details table">
@@ -138,8 +145,9 @@ const TeamPage = ({ tag }) => {
                         </Table>
                     </TableContainer>
                 )}
-            </div>
-            <div>
+            </Grid>
+            </Stack>
+            <Grid item xs = {12}>
                 {win_details.win_data.length > 0 && (
                     <LineChart
                     series={[
@@ -154,8 +162,9 @@ const TeamPage = ({ tag }) => {
                     margin={{ top: 30, right: 10, left: 30, bottom: 30 }}
                     />
                 )}
-            </div>
-        </div>
+            </Grid>
+            </Grid>
+        </Box>
     );
 }
 

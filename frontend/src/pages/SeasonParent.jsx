@@ -1,4 +1,5 @@
-import SeasonSidebar from "../components/shared/SeasonSidebar"
+// import SeasonSidebar from "../components/shared/seasonSidebar"
+import SeasonSidebar from "C:/Users/sugni/Documents/Code Workspace/dbms_fin_proj/ipl_mania/frontend/src/components/shared/seasonSideBar.jsx"
 import SeasonPage from "./SeasonPage"
 import seasons from '../lib/seasons'
 import { Routes, Route } from 'react-router-dom'

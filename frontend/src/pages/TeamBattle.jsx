@@ -33,6 +33,7 @@ const TeamBattle = () => {
     if (selectedTeam1 && selectedTeam2) {
       fetchResult();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTeam1, selectedTeam2]);
 
   return (
